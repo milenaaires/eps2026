@@ -3,12 +3,14 @@ name = "eps"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "Milena Aires",email = "mbadsdias@gmail.com"}
+    {name = "Milena Aires", email = "mbadsdias@gmail.com"}
 ]
 requires-python = ">=3.12"
 dependencies = [
 ]
 
+[tool.poetry]
+package-mode = false
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

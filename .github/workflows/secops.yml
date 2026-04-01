@@ -22,10 +22,10 @@ jobs:
         run: pip install poetry
 
       - name: Instalar dependências
-        run: poetry install
+        run: poetry install --no-root
 
       - name: Auditoria de Código (Bandit)
-        run: poetry run bandit -r . -x .venv
+        run: poetry run bandit -c pyproject.toml -r .
 
       - name: Verificação de Dependências (Safety)
         run: poetry run safety check
