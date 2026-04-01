@@ -1,0 +1,34 @@
+name: Pipeline SecOps
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  auditoria-e-qualidade:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar Poetry
+        run: pip install poetry
+
+      - name: Instalar dependências
+        run: poetry install
+
+      - name: Auditoria de Código (Bandit)
+        run: poetry run bandit -r . -x .venv
+
+      - name: Verificação de Dependências (Safety)
+        run: poetry run safety check
+
+      - name: Linter e Qualidade (Ruff)
+        run: poetry run ruff check .
